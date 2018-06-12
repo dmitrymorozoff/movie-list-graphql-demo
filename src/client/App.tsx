@@ -1,23 +1,18 @@
-import gql from "graphql-tag";
 import * as React from "react";
-import { graphql } from "react-apollo";
+import { styled } from "./components/styled-components";
+import { Home } from "./views/home";
 
-class App extends React.Component {
-    public render() {
-        // tslint:disable-next-line:no-console
-        console.log("props", this.props);
-        return <div className="App">Sample client for GraphQL</div>;
-    }
-}
-
-const allMoviesQuery = gql`
-    {
-        allMovies {
-            id
-            title
-            description
-        }
-    }
+const AppWrapper = styled.div`
+    width: 100%;
+    height: 100%;
 `;
 
-export const AppWrapper = graphql(allMoviesQuery)(App);
+export class App extends React.Component {
+    public render() {
+        return (
+            <AppWrapper>
+                <Home />
+            </AppWrapper>
+        );
+    }
+}

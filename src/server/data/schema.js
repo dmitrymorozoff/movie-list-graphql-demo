@@ -8,7 +8,9 @@ export const typeDefs = `
     director: String
     description: String
     stars: [String]
+    genres: [String]
     year: Int
+    poster: String
     }
     type Query {
         allMovies: [Movie]
