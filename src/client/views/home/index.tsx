@@ -56,8 +56,4 @@ class HomePage extends React.Component<IProps, {}> {
         console.log("movie id:", id, this.props);
     };
 }
-export const Home = graphql(allMoviesQuery, {
-    options: {
-        pollInterval: 1500,
-    },
-})(HomePage as any);
+export const Home = graphql(allMoviesQuery, {})(HomePage as any);
