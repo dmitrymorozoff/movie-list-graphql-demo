@@ -2,8 +2,8 @@ import express from "express";
 import { graphqlExpress, graphiqlExpress } from "apollo-server-express";
 import bodyParser from "body-parser";
 import { config, graphQLConfig } from "./config";
-import { schema } from "./data/schema";
 import cors from "cors";
+import { schema } from "./graphqlapi/schema/";
 
 const app = express();
 

@@ -1,6 +1,7 @@
 export const styles = {
     card: {
-        maxWidth: 345,
+        width: 300,
+        maxWidth: 300,
         margin: 20,
         cursor: "pointer",
         transition: ".3s",

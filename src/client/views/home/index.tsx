@@ -3,7 +3,11 @@ import { graphql, QueryProps } from "react-apollo";
 import { MovieCard } from "../../components/movie-card";
 import { allMoviesQuery } from "../../graphql/queries/movies";
 import { IAllMoviesQuery, IMovie } from "../../graphql/types/query-types";
+import { AddMovieButton } from "./components/add-movie-btn";
+import { HeaderWrapper } from "./components/header-wrapper";
 import { HomeWrapper } from "./components/home-wrapper";
+import { MovieWrapper } from "./components/movie-wrapper";
+import { Title } from "./components/title";
 
 interface IProps {
     data: IAllMoviesQuery & QueryProps;
@@ -11,7 +15,15 @@ interface IProps {
 
 class HomePage extends React.Component<IProps, {}> {
     public render() {
-        return <HomeWrapper>{this.getMovieCards()}</HomeWrapper>;
+        return (
+            <HomeWrapper>
+                <HeaderWrapper>
+                    <Title>Watched Movie List</Title>
+                    <AddMovieButton />
+                </HeaderWrapper>
+                <MovieWrapper>{this.getMovieCards()}</MovieWrapper>
+            </HomeWrapper>
+        );
     }
 
     private getMovieCards = () => {
@@ -44,4 +56,8 @@ class HomePage extends React.Component<IProps, {}> {
         console.log("movie id:", id, this.props);
     };
 }
-export const Home = graphql(allMoviesQuery)(HomePage as any);
+export const Home = graphql(allMoviesQuery, {
+    options: {
+        pollInterval: 1500,
+    },
+})(HomePage as any);

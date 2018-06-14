@@ -1,7 +1,4 @@
-/**
- * Тестовые данные для graphQL
- */
-const moviesData = [
+export const moviesData = [
     {
         id: 1,
         title: "The House That Jack Built",
@@ -48,16 +45,3 @@ const moviesData = [
         year: 2018,
     },
 ];
-
-export const resolvers = {
-    Query: {
-        allMovies: () => {
-            return moviesData;
-        },
-        movie: (root, { id }) => {
-            return moviesData.filter(movie => {
-                return movie.id === id;
-            })[0];
-        },
-    },
-};
