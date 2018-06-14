@@ -12,8 +12,6 @@ interface IProps {
 
 class Modal extends React.Component<IProps, {}> {
     public render() {
-        // tslint:disable-next-line:no-console
-        console.log("ss", this.props);
         const { onRequestClose }: any = this.props;
         return (
             <Dialog open={true} onClose={onRequestClose} aria-labelledby="form-dialog-title" color="default">
