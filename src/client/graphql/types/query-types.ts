@@ -1,6 +1,9 @@
 export interface IAllMoviesQuery {
     allMovies: IMovie[] | null;
-    movie: any;
+}
+
+export interface IMovieQuery {
+    movie: IMovie[] | null;
 }
 
 export interface IMovie {

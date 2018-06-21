@@ -3,6 +3,7 @@ import * as React from "react";
 import { graphql } from "react-apollo";
 import { allMoviesQuery, createMovieMutation } from "../../graphql/queries/movies";
 import { Form, IFormState } from "./components/form";
+const { toast } = require("react-toastify");
 
 interface IProps {
     classes: any;
@@ -24,11 +25,11 @@ class Modal extends React.Component<IProps, {}> {
         );
     }
 
-    private onSubmitHandler = ({ title, description, director, poster, year }: IFormState) => {
+    private onSubmitHandler = ({ year, ...rest }: IFormState) => {
         const { onRequestClose } = this.props;
         onRequestClose();
         this.props.createMovieMutation({
-            variables: { title, description, director, poster, year: parseInt(year, 10) },
+            variables: { year: parseInt(year, 10), ...rest },
             update: (proxy: any, { data: { createMovie: movie } }: { data: any }) => {
                 if (movie) {
                     const data: any = proxy.readQuery({
@@ -42,6 +43,7 @@ class Modal extends React.Component<IProps, {}> {
                 }
             },
         });
+        toast.info("Movie added successfully");
     };
 }
 

@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { movieFragments } from "../fragments/movie";
 
 export const allMoviesQuery = gql`
     {
@@ -10,6 +11,15 @@ export const allMoviesQuery = gql`
             description
         }
     }
+`;
+
+export const movieQuery = gql`
+    query movie($id: Int!) {
+        movie(id: $id) {
+            ...movieFields
+        }
+    }
+    ${movieFragments}
 `;
 
 export const createMovieMutation = gql`

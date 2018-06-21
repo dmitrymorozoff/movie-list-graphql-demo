@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ToastContainer } from "react-toastify";
 import { styled } from "./components/styled-components";
 import { Home } from "./views/home";
 
@@ -12,6 +13,7 @@ export class App extends React.Component {
         return (
             <AppWrapper>
                 <Home />
+                <ToastContainer position="top-left" newestOnTop={true} />
             </AppWrapper>
         );
     }

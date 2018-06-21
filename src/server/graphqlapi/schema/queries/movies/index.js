@@ -21,10 +21,13 @@ const typeDefs = `
     poster: String
     }
     type Query {
+        # Список всех фильмов
         allMovies: [Movie]
+        # Фильм по айдишнику
         movie(id: Int!): Movie
     }
     type Mutation {
+        # Добавить новый фильм
         createMovie(title: String!, director: String, description: String, stars: [String], genres: [String], year:Int, poster: String! ): Movie
     }
 `;
@@ -32,9 +35,12 @@ const typeDefs = `
 export const moviesSubSchema = new SubSchema(typeDefs, {
     Query: {
         allMovies: () => {
+            console.log("id");
+
             return moviesData;
         },
         movie: (root, { id }) => {
+            console.log("id", id);
             return moviesData.filter(movie => {
                 return movie.id === id;
             })[0];

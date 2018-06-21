@@ -5,6 +5,7 @@ import "normalize.css/normalize.css";
 import * as React from "react";
 import { ApolloProvider } from "react-apollo";
 import * as ReactDOM from "react-dom";
+import "react-toastify/dist/ReactToastify.css";
 import { App } from "./client/App";
 import "./client/styles/global.css";
 import { config } from "./server/config";
