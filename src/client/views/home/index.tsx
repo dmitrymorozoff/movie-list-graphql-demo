@@ -1,8 +1,9 @@
 import * as React from "react";
 import { compose, graphql, QueryProps } from "react-apollo";
 import { MovieCard } from "../../components/movie-card";
-import { allMoviesQuery, movieQuery } from "../../graphql/queries/movies";
-import { IAllMoviesQuery, IMovie, IMovieQuery } from "../../graphql/types/query-types";
+import { MovieDialog } from "../../components/movie-dialog";
+import { allMoviesQuery } from "../../graphql/queries/movies";
+import { IAllMoviesQuery, IMovie } from "../../graphql/types/query-types";
 import { AddMovieButton } from "./components/add-movie-btn";
 import { HeaderWrapper } from "./components/header-wrapper";
 import { HomeWrapper } from "./components/home-wrapper";
@@ -11,13 +12,24 @@ import { Title } from "./components/title";
 
 interface IProps {
     allMoviesQuery: IAllMoviesQuery & QueryProps;
-    movieQuery: IMovieQuery & QueryProps;
 }
 
-class HomePage extends React.Component<IProps, {}> {
+interface IState {
+    selectedMovieId: number;
+    isOpenMovie: boolean;
+}
+
+class HomePage extends React.Component<IProps, IState> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            selectedMovieId: 1,
+            isOpenMovie: false,
+        };
+    }
+
     public render() {
-        // tslint:disable-next-line:no-console
-        console.log("RATA", this.props);
+        const { selectedMovieId, isOpenMovie } = this.state;
         return (
             <HomeWrapper>
                 <HeaderWrapper>
@@ -25,6 +37,11 @@ class HomePage extends React.Component<IProps, {}> {
                     <AddMovieButton />
                 </HeaderWrapper>
                 <MovieWrapper>{this.getMovieCards()}</MovieWrapper>
+                <MovieDialog
+                    selectedMovieId={selectedMovieId}
+                    isOpen={isOpenMovie}
+                    onClose={this.onCloseMovieDialogHandler}
+                />
             </HomeWrapper>
         );
     }
@@ -53,15 +70,19 @@ class HomePage extends React.Component<IProps, {}> {
     };
 
     private onLearnMoreClickHandler = (id: number) => {
-        // tslint:disable-next-line:no-console
-        console.log("movie id:", id, this.props);
+        this.setState({
+            isOpenMovie: true,
+            selectedMovieId: id,
+        });
+    };
+
+    private onCloseMovieDialogHandler = () => {
+        this.setState({
+            isOpenMovie: false,
+        });
     };
 }
 
 const allMoviesQueryData = graphql(allMoviesQuery, { name: "allMoviesQuery" });
-const movieQueryData = graphql(movieQuery, { name: "movieQuery", options: () => ({ variables: { id: 1 } }) });
 
-export const Home = compose(
-    allMoviesQueryData,
-    movieQueryData,
-)(HomePage as any);
+export const Home = compose(allMoviesQueryData)(HomePage as any);
