@@ -1,28 +1,28 @@
 # movie-list-graphql-demo
 
-Просто приложение для ведения списка просмотренных фильмов
+A basic Movie List client built with React, GraphQL, and Apollo.
 
-## NPM-скрипты
+## NPM-scripts
 
-Установка зависимостей:
+Install dependencies from package.json:
 
 ```bash
 $ npm install
 ```
 
-Запуск локального сервера для разработки на React по адресу `localhost:3000`:
+Start local development server `localhost:3000`:
 
 ```bash
 $ npm start
 ```
 
-Запуск локального сервера c GraphQL `localhost:4000`:
+Start express server with GraphQL `localhost:4000`:
 
 ```bash
 $ npm run server
 ```
 
-## Технологии
+## Stack
 
 -   React
 -   TypeScript
